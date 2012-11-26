@@ -1,0 +1,17 @@
+dependency:
+	GNU/Linux
+	libnetfilter_queue
+	iptables
+
+usage:
+	client: 
+		make
+		vi rules_client.sh
+		sh rules_client.sh
+		./happy client realPort portIntervalLeft portIntervalRight # [left, right)
+	
+	server side :
+		make
+		vi rules_server.sh
+		sh rules_server.sh
+		./happy server realPort portIntervalLeft portIntervalRight
