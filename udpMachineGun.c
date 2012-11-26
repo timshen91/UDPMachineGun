@@ -1,5 +1,4 @@
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <arpa/inet.h>
@@ -12,6 +11,7 @@ int mode; // 0 : server, 1 : client
 uint16_t truePort, lPort, rPort;
 int count = 0;
 
+// checksum's from libnetfilter_queue.
 uint16_t checksum(uint32_t sum, uint16_t * buf, int size) {
 	while (size > 1) {
 		sum += *buf++;
@@ -91,7 +91,6 @@ int outHandler(struct nfq_q_handle * qh, struct nfgenmsg * nfmsg, struct nfq_dat
 		if (mode == 1) {
 			if (ntohs(uhdr->dest) == truePort) {
 				subst(iphdr, uhdr, &uhdr->dest, htons(rand() % (rPort - lPort) + lPort));
-				printf("%d\n", count++);
 			}
 		} else {
 			if (ntohs(uhdr->source) == truePort) {
