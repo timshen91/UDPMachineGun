@@ -1,2 +1,2 @@
 all:
-	gcc udpMachineGun.c -lnetfilter_queue -o happy
+	gcc -Wall udpMachineGun.c -lnetfilter_queue -o happy
