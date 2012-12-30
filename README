@@ -3,7 +3,7 @@ What is this?
                          /                                   \
 Client udp 1194 => random - udp 9457 <=> NAT maybe => ...    <=> udp 1194 Server
                          \                                   /
-				     	  udp 4565 <=> NAT maybe <=> ... <=> 
+                          udp 4565 <=> NAT maybe <=> ... <=> 
 
 It's a NAT, with each packet using a random port IN CONFIGURED RANGE.
 
