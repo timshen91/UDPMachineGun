@@ -66,10 +66,12 @@ int inHandler(struct nfq_q_handle * qh, struct nfgenmsg * nfmsg, struct nfq_data
 		struct udphdr * uhdr = (struct udphdr *)((unsigned char *)iphdr + iphdr->ihl * 4);
 		if (mode == 1) {
 			if (lPort <= ntohs(uhdr->source) && ntohs(uhdr->source) < rPort) {
+				printf("%d\n", count++);
 				subst(iphdr, uhdr, &uhdr->source, htons(truePort));
 			}
 		} else {
 			if (lPort <= ntohs(uhdr->dest) && ntohs(uhdr->dest) < rPort) {
+				printf("%d\n", count++);
 				portTable[uhdr->source] = uhdr->dest;
 				subst(iphdr, uhdr, &uhdr->dest, htons(truePort));
 			}
@@ -93,10 +95,12 @@ int outHandler(struct nfq_q_handle * qh, struct nfgenmsg * nfmsg, struct nfq_dat
 		struct udphdr * uhdr = (struct udphdr *)((unsigned char *)iphdr + iphdr->ihl * 4);
 		if (mode == 1) {
 			if (ntohs(uhdr->dest) == truePort) {
+				printf("%d\n", count++);
 				subst(iphdr, uhdr, &uhdr->dest, htons(rand() % (rPort - lPort) + lPort));
 			}
 		} else {
 			if (ntohs(uhdr->source) == truePort) {
+				printf("%d\n", count++);
 				subst(iphdr, uhdr, &uhdr->source, portTable[uhdr->dest]);
 			}
 		}

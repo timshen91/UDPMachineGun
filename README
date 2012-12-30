@@ -1,15 +1,24 @@
-dependency:
+What is this?
+                          udp 3243 <=> NAT maybe <=> ... <=> 
+                         /                                   \
+Client udp 1194 => random - udp 9457 <=> NAT maybe => ...    <=> udp 1194 Server
+                         \                                   /
+				     	  udp 4565 <=> NAT maybe <=> ... <=> 
+
+It's a NAT, with each packet using a random port IN CONFIGURED RANGE.
+
+Dependency:
 	GNU/Linux
 	libnetfilter_queue
 	iptables
 
-usage:
-	client: 
+Usage:
+	Client: 
 		make
 		vi rules_client.sh
 		./rules_client.sh
 	
-	server side :
+	Server:
 		make
 		vi rules_server.sh
 		./rules_server.sh
